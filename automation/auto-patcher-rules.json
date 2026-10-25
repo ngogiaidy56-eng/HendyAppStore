@@ -1,0 +1,23 @@
+{
+  "rules": [
+    {
+      "id": "RULE_BASE64_PADDING",
+      "pattern": "illegal base64 data|padding error",
+      "action": "AUTO_REPAIR_BASE64_MIME",
+      "retryWorkflow": true
+    },
+    {
+      "id": "RULE_TIMESTAMP_TIMEOUT",
+      "pattern": "timestamp server timeout|0x80070002",
+      "action": "SWITCH_TO_FALLBACK_RFC3161_SERVER",
+      "fallbackUrl": "http://timestamp.sectigo.com",
+      "retryWorkflow": true
+    },
+    {
+      "id": "RULE_PROVISIONING_MISMATCH",
+      "pattern": "bundleId mismatch|Provisioning profile does not include",
+      "action": "AUTO_SELECT_ENTERPRISE_INHOUSE_PROFILE",
+      "retryWorkflow": true
+    }
+  ]
+}

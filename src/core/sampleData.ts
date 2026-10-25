@@ -1,0 +1,185 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { AppRelease, BuildMatrixJob, SyncLog } from './types';
+
+export const SAMPLE_RELEASES: AppRelease[] = [
+  {
+    id: 'app-hendy-core',
+    name: 'Hendy SuperApp',
+    version: '2.5.4',
+    buildNumber: 1042,
+    updatedAt: '2026-10-24T18:40:00Z',
+    icon: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=256&auto=format&fit=crop&q=80',
+    summary: 'Ứng dụng điều hành đa nền tảng số hóa doanh nghiệp, hỗ trợ ví điện tử và tích hợp bảo mật phần cứng.',
+    description: 'Bản phát hành chính thức phiên bản 2.5.4 vượt qua quy chuẩn kiểm duyệt bảo mật quân sự, ký số xác thực V2+V3 trên Android và chứng thư Apple Enterprise không bị thu hồi.',
+    downloads: 148520,
+    rating: 4.9,
+    size: '42.8 MB',
+    bundleId: 'com.hendy.superapp',
+    developer: 'Hendy Global Technology Ltd.',
+    artifacts: {
+      android: {
+        apkUrl: 'https://r2.hendyappstore.com/binaries/android/HendySuperApp-v2.5.4-v2signed.apk',
+        packageName: 'com.hendy.superapp',
+        sha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
+        minSdk: 26,
+        targetSdk: 35,
+        signatureVersion: 'V2+V3 Signed',
+        proguardHash: 'proguard-r8-982c7f',
+      },
+      ios: {
+        ipaUrl: 'https://r2.hendyappstore.com/binaries/ios/HendySuperApp-v2.5.4-enterprise.ipa',
+        bundleId: 'com.hendy.superapp',
+        manifestPlistUrl: 'https://hendyappstore.com/api/manifest.plist?id=com.hendy.superapp&v=2.5.4',
+        signingIdentity: 'Apple Distribution: Hendy Global Enterprise Corp (8Q9W2E)',
+        expirationDate: '2027-10-20',
+        isEnterprise: true,
+      },
+      windows: {
+        exeUrl: 'https://r2.hendyappstore.com/binaries/windows/HendySuperApp-Setup-x64.exe',
+        version: '2.5.4.0',
+        publisher: 'Hendy Global Technology Ltd. (EV Code Signing)',
+        sha256: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+        smartScreenVerified: true,
+      },
+    },
+  },
+  {
+    id: 'app-hendy-crypto',
+    name: 'Hendy Vault & Key',
+    version: '1.9.0',
+    buildNumber: 420,
+    updatedAt: '2026-10-23T11:20:00Z',
+    icon: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=256&auto=format&fit=crop&q=80',
+    summary: 'Ví cứng phần mềm và trình xác thực 2FA đa thiết bị với mã hóa Libsodium cấp ngân hàng.',
+    description: 'Bảo vệ toàn diện khóa riêng tư và tài khoản điện toán đám mây. Đồng bộ qua kênh kết nối P2P mã hóa đầu cuối.',
+    downloads: 87300,
+    rating: 4.8,
+    size: '28.4 MB',
+    bundleId: 'com.hendy.vault',
+    developer: 'Hendy Security Labs',
+    artifacts: {
+      android: {
+        apkUrl: 'https://r2.hendyappstore.com/binaries/android/HendyVault-v1.9.0.apk',
+        packageName: 'com.hendy.vault',
+        sha256: '7d793037a0760186574b0282f2f435e7b1e50774690f4b3bf448003a7493a123',
+        minSdk: 28,
+        targetSdk: 35,
+        signatureVersion: 'V2+V3 Signed',
+        proguardHash: 'proguard-r8-112fa8',
+      },
+      ios: {
+        ipaUrl: 'https://r2.hendyappstore.com/binaries/ios/HendyVault-v1.9.0.ipa',
+        bundleId: 'com.hendy.vault',
+        manifestPlistUrl: 'https://hendyappstore.com/api/manifest.plist?id=com.hendy.vault&v=1.9.0',
+        signingIdentity: 'Apple Distribution: Hendy Global Enterprise Corp (8Q9W2E)',
+        expirationDate: '2027-10-20',
+        isEnterprise: true,
+      },
+      windows: {
+        exeUrl: 'https://r2.hendyappstore.com/binaries/windows/HendyVault-Setup.exe',
+        version: '1.9.0.0',
+        publisher: 'Hendy Security Labs (EV Code Signing)',
+        sha256: 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb',
+        smartScreenVerified: true,
+      },
+    },
+  },
+];
+
+export const INITIAL_SYNC_LOGS: SyncLog[] = [
+  {
+    id: 'log-1',
+    timestamp: '2026-10-25 07:15:22',
+    source: 'Edge-Router',
+    level: 'info',
+    message: 'Chặn bắt request từ Cloudflare DNS Proxy (1.1.1.1). Nhận diện thiết bị người dùng thành công.',
+  },
+  {
+    id: 'log-2',
+    timestamp: '2026-10-25 07:18:04',
+    source: 'Web-Admin',
+    level: 'info',
+    message: 'Nạp gói dữ liệu 26 Secrets & Variables, tiến hành mã hóa Libsodium hộp bảo mật.',
+  },
+  {
+    id: 'log-3',
+    timestamp: '2026-10-25 07:18:07',
+    source: 'Workers-API',
+    level: 'success',
+    message: 'Đã nhận Public Key GitHub và cập nhật đồng bộ 26 secrets lên GitHub Actions Repository Secrets.',
+    secretKey: 'ANDROID_KEYSTORE_BASE64',
+  },
+  {
+    id: 'log-4',
+    timestamp: '2026-10-25 07:18:15',
+    source: 'GitHub-API',
+    level: 'success',
+    message: 'Trigger Workflow Matrix: matrix-build.yml thành công trên 3 runner cô lập.',
+  },
+  {
+    id: 'log-5',
+    timestamp: '2026-10-25 07:20:00',
+    source: 'Self-Healing',
+    level: 'info',
+    message: 'Hệ thống AI giám sát kiểm tra tính toàn vẹn chữ ký số: Android V2, Apple Enterprise, Windows Authenticode ĐẠT chuẩn.',
+  },
+];
+
+export const INITIAL_MATRIX_JOBS: BuildMatrixJob[] = [
+  {
+    id: 'job-android',
+    os: 'android',
+    title: 'Android Build & Sign (APK V2/V3)',
+    status: 'success',
+    durationSeconds: 142,
+    outputArtifact: 'HendySuperApp-v2.5.4-v2signed.apk',
+    fileSize: '42.8 MB',
+    signatureStandard: 'APK Signature Scheme V2+V3 (apksigner)',
+    sha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
+    steps: [
+      { name: 'Khởi tạo Ubuntu runner & JDK 17', status: 'completed', log: 'Runner ready. OpenJDK 17 Temurin configured.' },
+      { name: 'Giải mã Base64 ANDROID_KEYSTORE_BASE64', status: 'completed', log: 'Keystore decoded cleanly: 4096-bit RSA certificate loaded.' },
+      { name: 'Gradle AssembleRelease + R8 ProGuard', status: 'completed', log: 'Compilation complete. Minified code and optimized DEX.' },
+      { name: 'apksigner V2/V3 Verification', status: 'completed', log: 'apksigner verified: VERIFIES_V1=true, VERIFIES_V2=true, VERIFIES_V3=true.' },
+      { name: 'Upload Cloudflare R2 Storage', status: 'completed', log: 'S3 compatible upload complete: etag "9f86d081884c7d65"' },
+    ],
+  },
+  {
+    id: 'job-ios',
+    os: 'ios',
+    title: 'iOS Build & Archive (OTA IPA)',
+    status: 'success',
+    durationSeconds: 215,
+    outputArtifact: 'HendySuperApp-v2.5.4-enterprise.ipa',
+    fileSize: '54.2 MB',
+    signatureStandard: 'Apple Enterprise In-House Distribution',
+    sha256: '2c624232cdd221771294dfbb310aca000a0df6ec9b5feb9fed45c4ac1e14adc8',
+    steps: [
+      { name: 'Khởi tạo macOS Sequoia runner & Xcode 16', status: 'completed', log: 'macOS runner allocated. Xcode 16.1 toolchain ready.' },
+      { name: 'Nhập P12 & MobileProvision từ Base64', status: 'completed', log: 'Imported cert.p12 into ephemeral keychain. Identity unlocked.' },
+      { name: 'Fastlane Gym Archive & CodeSign', status: 'completed', log: 'Codesign passed: Signed with Enterprise Distribution identity.' },
+      { name: 'Tạo dynamic manifest.plist và upload R2', status: 'completed', log: 'Generated manifest.plist. Uploaded IPA & images to R2.' },
+    ],
+  },
+  {
+    id: 'job-windows',
+    os: 'windows',
+    title: 'Windows Executable SignTool (Authenticode EXE)',
+    status: 'success',
+    durationSeconds: 98,
+    outputArtifact: 'HendySuperApp-Setup-x64.exe',
+    fileSize: '68.5 MB',
+    signatureStandard: 'Authenticode SHA256 (DigiCert RFC3161)',
+    sha256: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+    steps: [
+      { name: 'Khởi tạo Windows 2025 Server runner', status: 'completed', log: 'Windows runner ready. SignTool.exe located in Windows SDK.' },
+      { name: 'Giải mã WINDOWS_CERT_PFX_BASE64', status: 'completed', log: 'PFX certificate unpacked into memory keystore.' },
+      { name: 'SignTool.exe Sign & Timestamping', status: 'completed', log: 'Successfully signed: SHA256 digest + DigiCert timestamp added.' },
+      { name: 'Upload Cloudflare R2 & Notify Discord', status: 'completed', log: 'Uploaded to R2 bucket. Webhook dispatched to Discord.' },
+    ],
+  },
+];

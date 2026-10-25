@@ -1,0 +1,37 @@
+name: Deploy Serverless Workers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/**'
+      - '.github/workflows/deploy-workers.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy-workers:
+    name: Deploy Cloudflare Workers Services
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Deploy Edge Router
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ vars.CF_ACCOUNT_ID }}
+          workingDirectory: 'workers/edge-router'
+      - name: Deploy Backend API
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ vars.CF_ACCOUNT_ID }}
+          workingDirectory: 'workers/backend-api'
+      - name: Deploy Self-Healing Bot
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ vars.CF_ACCOUNT_ID }}
+          workingDirectory: 'workers/self-healing-bot'

@@ -1,0 +1,6 @@
+{
+  "name": "HendyAppStore - Adaptive UI & Serverless Pipeline",
+  "description": "Adaptive UI, Serverless Workers & Automation Environment Sync Pipeline with 26-Secret Sync, Matrix CI/CD, and Multi-OS App Distribution.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

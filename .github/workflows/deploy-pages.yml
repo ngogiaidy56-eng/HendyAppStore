@@ -1,0 +1,51 @@
+name: Deploy Web Apps to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'functions/**'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy-user-portal:
+    name: Build & Deploy Web-User (Storefront)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Monorepo Dependencies
+        run: npm ci
+      - name: Build Web-User
+        run: npm run build --workspace=apps/web-user
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ vars.CF_ACCOUNT_ID }}
+          projectName: 'hendy-store-user'
+          directory: 'apps/web-user/dist'
+
+  deploy-admin-portal:
+    name: Build & Deploy Web-Admin (Dev Studio & CMS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Monorepo Dependencies
+        run: npm ci
+      - name: Build Web-Admin
+        run: npm run build --workspace=apps/web-admin
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ vars.CF_ACCOUNT_ID }}
+          projectName: 'hendy-store-admin'
+          directory: 'apps/web-admin/dist'

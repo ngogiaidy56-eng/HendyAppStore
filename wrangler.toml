@@ -1,0 +1,22 @@
+name = "hendy-appstore-ecosystem"
+main = "workers/edge-router/src/index.js"
+compatibility_date = "2026-03-01"
+
+# Cấu hình Cloudflare D1 Serverless Database
+[[d1_databases]]
+binding = "DB"
+database_name = "hendy-store-d1"
+database_id = "e57c6b90-1a2b-4c3d-8e9f-0a1b2c3d4e5f"
+
+# Cấu hình Cloudflare R2 Storage (Kho Binary .apk, .ipa, .exe)
+[[r2_buckets]]
+binding = "STORAGE_R2"
+bucket_name = "hendy-appstore-binaries-prod"
+
+# Cấu hình KV Namespace cho Edge Router Cache
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "7f9c3a2b1e0d4f5a8b7c6d5e4f3a2b1c"
+
+[vars]
+ALLOWED_ORIGINS = "https://hendyappstore.com,https://admin.hendyappstore.com"
